@@ -25,11 +25,19 @@
                     <li>Iterators</li>
                 </a>
 
-                <a class="nav-link" href="#Generators"><li>Generators</li></a>
+                <a class="nav-link" href="#Generators">
+                    <li>Generators</li>
+                </a>
 
-                <a class="nav-link" href="#Iterables"><li>Iterables</li></a>
-                <a class="nav-link" href="#Advanced_Generators"><li>Advanced Generators</li></a>
-                <a class="nav-link" href="#Reference"><li>Reference</li></a>
+                <a class="nav-link" href="#Iterables">
+                    <li>Iterables</li>
+                </a>
+                <a class="nav-link" href="#Advanced_Generators">
+                    <li>Advanced Generators</li>
+                </a>
+                <a class="nav-link" href="#Reference">
+                    <li>Reference</li>
+                </a>
 
             </ul>
         </nav>
@@ -98,35 +106,123 @@ console.log(myArray.next().done); // true</code>
                 <header>
                     <h1>Generators</h1>
                 </header>
-                <p></p>
-                <p></p>
-                <code class="long"></code>
+                <p>Custom iterators can be very helpful for many tasks, however their stateful nature means that programming
+                    them can be tricky.
+                    <strong>Generators</strong> offer a way to write an iterative algorithm via a function capable of keeping track
+                    of its own state.</p>
+                <p>
+                    <strong>GeneratorFunctions</strong> are special functions that behave as factories for iterators. Such functions
+                    return new Generator objects. The
+                    <code>function*</code> syntax is used to designate a function as a GeneratorFunction</p>
+                <code class="long">function* idMaker() {
+    var index = 0;
+    while(true)
+        yield index++;
+}
+
+var gen = idMaker();
+
+console.log(gen.next().value); // 0
+console.log(gen.next().value); // 1
+console.log(gen.next().value); // 2
+// ...</code>
 
             </section>
             <section id="Iterables" class="main-section">
                 <header>
                     <h1>Iterables</h1>
                 </header>
-                <p></p>
-                <p></p>
-                <p></p>
-                <code class="long"></code>
-                <p></p>
-                <p></p>
-                <code class="long"></code>
+                <p>
+                    <strong>Iterables</strong> are objects that have a specified iteration behavior.</p>
+                <p>Objects must implement the
+                    <code>@@iterator</code> method in order to be
+                    <strong>iterable</strong>. This requires the object to have a property with the
+                    <code>Symbol.iterator</code> key.</p>
+                <p>Custom iterables may be defined as follows:</p>
+                <code class="long">var myIterable = {};
+myIterable[Symbol.iterator] = function* () {
+    yield 1;
+    yield 2;
+    yield 3;
+};
+
+for (let value of myIterable) {
+    console.log(value);
+}
+// 1
+// 2
+// 3</code>
+                <p>The built-in
+                    <code>String</code>,
+                    <code>Array</code>,
+                    <code>TypedArray</code>, and
+                    <code>Set</code> types are all iterables, as their prototypes have a
+                    <code>Symbol.iterator</code> method defined.</p>
+                <p>A few statements and expressions require an iterable, including
+                    <code>for-of</code> loops, spread syntax,
+                    <code>yield*</code>, and destructuring assignment</p>
+                <code class="long">for (let value of ['a', 'b', 'c']) {
+    console.log(value);
+}
+// "a"
+// "b"
+// "c"
+
+[...'abc']; // ["a", "b", "c"]
+
+function* gen() {
+    yield* ['a', 'b', 'c'];
+}
+
+gen().next(); // { value: "a", done: false }
+
+[a, b, c] = new Set(['a', 'b', 'c']);
+a; // "a"</code>
 
             </section>
             <section id="Advanced_Generators" class="main-section">
                 <header>
                     <h1>Advanced Generators</h1>
                 </header>
-                <p></p>
-                <p></p>
-                <p></p>
-                <code class="long"></code>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>Generators can be used to efficiently represent infinite or expensive sequences because their values are
+                    only calculated as needed instead of all together at initialization.</p>
+                <p>The
+                    <code>next()</code> method of a generator is also able to accept an input value that can be used to modify the generator's
+                    internal state. This value will be treated as the result of the last
+                    <code>yield</code> that the generator stopped at.</p>
+                <p>Fibonacci Sequence generator that uses
+                    <code>next(x)</code> to restart the generator sequence mid-way:</p>
+                <code class="long">function* fibonacci() {
+var fn1 = 0;
+var fn2 = 1;
+while (true) {
+    var current = fn1;
+    fn1 = fn2;
+    fn2 = current + fn1;
+    var reset = yield current;
+    if (reset) {
+        fn1 = 0;
+        fn2 = 1;
+    }
+}
+}
+
+var sequence = fibonacci();
+console.log(sequence.next().value);     // 0
+console.log(sequence.next().value);     // 1
+console.log(sequence.next().value);     // 1
+console.log(sequence.next().value);     // 2
+console.log(sequence.next().value);     // 3
+console.log(sequence.next().value);     // 5
+console.log(sequence.next().value);     // 8
+console.log(sequence.next(true).value); // 0
+console.log(sequence.next().value);     // 1
+console.log(sequence.next().value);     // 1
+console.log(sequence.next().value);     // 2</code>
+                <p>Generators can be forced to throw exceptions by calling their
+                    <code>throw()</code> methods and passing in a value for the exception to throw.</p>
+                <p>Generators possess a
+                    <code>return(value)</code> method that finishes the generator and returns the input value.</p>
 
             </section>
             <section id="Reference" class="main-section">
