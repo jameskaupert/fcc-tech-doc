@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/reset.css">
     <link rel="stylesheet" href="assets/styles/main.css">
     <title>Technical Documentation</title>
@@ -12,32 +13,27 @@
 
 <body>
     <div class="main-container">
-        <nav id="navbar">
+        <nav id="navbar" class="navbar">
             <header>
                 <h1>JS Iterators &amp; Generators</h1>
             </header>
             <ul>
-                <li>
-                    <a class="nav-link" href="#Introduction">Introduction</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="#Iterators">Iterators</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="#Generators">Generators</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="#Iterables">Iterables</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="#Advanced_Generators">Advanced Generators</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="#Reference">Reference</a>
-                </li>
+                <a class="nav-link" href="#Introduction">
+                    <li>Introduction</li>
+                </a>
+                <a class="nav-link" href="#Iterators">
+                    <li>Iterators</li>
+                </a>
+
+                <a class="nav-link" href="#Generators"><li>Generators</li></a>
+
+                <a class="nav-link" href="#Iterables"><li>Iterables</li></a>
+                <a class="nav-link" href="#Advanced_Generators"><li>Advanced Generators</li></a>
+                <a class="nav-link" href="#Reference"><li>Reference</li></a>
+
             </ul>
         </nav>
-        <main id="main-doc">
+        <main id="main-doc" class="main-doc">
             <section id="Introduction" class="main-section">
                 <header>
                     <h1>Introduction</h1>
@@ -63,90 +59,88 @@
                 <header>
                     <h1>Iterators</h1>
                 </header>
-                    <p>
-                        <strong>Iterators</strong> are objects that understand how to work with items in collections in sequence,
-                        in addition to understanding details about the element's position in the collection of items. Any
-                        object in JavaScript with a
-                        <code>next()</code> method that also returns the next item in the sequence is an iterator. Such methods must return
-                        an object with properties of
-                        <code>done</code> and
-                        <code>value</code>
-                    </p>
+                <p>
+                    <strong>Iterators</strong> are objects that understand how to work with items in collections in sequence, in
+                    addition to understanding details about the element's position in the collection of items. Any object
+                    in JavaScript with a
+                    <code>next()</code> method that also returns the next item in the sequence is an iterator. Such methods must return an object
+                    with properties of
+                    <code>done</code> and
+                    <code>value</code>
+                </p>
 
-                    <p>After iterators have been created, they may be reused again and again by calling
-                        <code>next()</code>
-                    </p>
+                <p>After iterators have been created, they may be reused again and again by calling
+                    <code>next()</code>
+                </p>
 
-                    <code class="long">
-                        function makeIterator(array) {
-                            var nextIndex = 0;
+                <code class="long">function makeIterator(array) {
+    var nextIndex = 0;
 
-                            return {
-                                next: function() {
-                                    return nextIndex < array.length ?
-                                        {value: array[nextIndex++], done: false} :
-                                        {done: true};
-                                }
-                            };
-                        }
-                    </code>
+    return {
+        next: function() {
+            return nextIndex < array.length ?
+                {value: array[nextIndex++], done: false} :
+                {done: true};
+        }
+    };
+}</code>
 
-                    <p>After an iterator has been initialized,
-                        <code>next()</code> can be used to retrieve key-value pairs from the object:</p>
+                <p>After an iterator has been initialized,
+                    <code>next()</code> can be used to retrieve key-value pairs from the object:</p>
 
-                    <code class="long">
-                        var myArray = makeIterator(['one', 'two']);
-                        console.log(myArray.next().value); // 'one'
-                        console.log(myArray.next().value); // 'two'
-                        console.log(myArray.next().done); // true
-                    </code>
+                <code class="long">var myArray = makeIterator(['one', 'two']);
+console.log(myArray.next().value); // 'one'
+console.log(myArray.next().value); // 'two'
+console.log(myArray.next().done); // true</code>
 
             </section>
             <section id="Generators" class="main-section">
                 <header>
                     <h1>Generators</h1>
                 </header>
-                    <p></p>
-                    <p></p>
-                    <code class="long"></code>
+                <p></p>
+                <p></p>
+                <code class="long"></code>
 
             </section>
             <section id="Iterables" class="main-section">
                 <header>
                     <h1>Iterables</h1>
                 </header>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <code class="long"></code>
-                    <p></p>
-                    <p></p>
-                    <code class="long"></code>
+                <p></p>
+                <p></p>
+                <p></p>
+                <code class="long"></code>
+                <p></p>
+                <p></p>
+                <code class="long"></code>
 
             </section>
             <section id="Advanced_Generators" class="main-section">
                 <header>
                     <h1>Advanced Generators</h1>
                 </header>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <code class="long"></code>
-                    <p></p>
-                    <p></p>
-                    <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <code class="long"></code>
+                <p></p>
+                <p></p>
+                <p></p>
 
             </section>
             <section id="Reference" class="main-section">
                 <header>
                     <h1>Reference</h1>
                 </header>
+                <p>Content is used here solely as an exercise to demonstrate the creation of a technical documentation page.</p>
                 <ul>
                     <li>Source:
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_generators" target="_blank">Mozilla Developer Network</a> based on work by Mozilla Contributors, licensed under
-                        <a href="http://creativecommons.org/licenses/by-sa/2.5/">CC-BY-SA 2.5</a>
+                        <a class="main-doc-link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_generators" target="_blank">Mozilla Developer Network</a> based on work by Mozilla Contributors.
                     </li>
-                    <li>Content is used here solely as an exercise to demonstrate the creation of a technical documentation page</li>
+                    <li>Original content licensed under
+                        <a class="main-doc-link" href="http://creativecommons.org/licenses/by-sa/2.5/">CC-BY-SA 2.5</a>
+                    </li>
                 </ul>
             </section>
         </main>
