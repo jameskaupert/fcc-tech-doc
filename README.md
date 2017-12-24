@@ -19,4 +19,4 @@
 
 ### Layout
 1. [x] On regular sized devices (laptops, desktops), the element with `id="navbar"` should be shown on the left side of the screen and should always be visible to the user.
-2. [ ] My Technical Documentation page should use at least one media query.
+2. [x] My Technical Documentation page should use at least one media query.
