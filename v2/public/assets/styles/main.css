@@ -1,0 +1,26 @@
+.wrapper {
+  display: grid;
+  grid:
+    'navbar'
+    'maindoc';
+}
+
+#navbar {
+  grid-area: navbar;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  border: 1px solid black;
+}
+
+#main-doc {
+  grid-area: maindoc;
+}
+
+@media all and (min-width: 1024px) {
+  .wrapper {
+    display: grid;
+    grid:
+      'navbar maindoc'
+  }
+}
