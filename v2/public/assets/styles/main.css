@@ -45,6 +45,10 @@ p {
   padding: 1rem;
 }
 
+li {
+  padding-bottom: 1rem;
+}
+
 .code {
   background-color: #eee;
   border-radius: 3px;
